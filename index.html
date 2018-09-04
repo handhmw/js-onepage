@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Design Web Responsive</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/media.css">
+  <link rel="stylesheet" type="text/css" href="css/menu.css">
+  <link rel="stylesheet" type="text/css" href="dist/css/amaran.min.css">
+  <link rel="stylesheet" type="text/css" href="dist/css/animate.min.css">
+
+</head>
+<body>
+  <div id="pagewrap">
+     <div id="header">
+    	<h1>JUDUL</h1>
+        <div id="navcontainer">
+            <label class="show-menu" for="show-menu"><i class="fa fa-bars fa-2"></i></label>
+            <input autocomplete="off" id="show-menu" role="button" type="checkbox">
+            <ul id="menus">
+				<!--MENU DISINI-->
+            <li><a id="menu-beranda" href="#">Beranda</a></li>
+            <li><a id="menu-pesan" href="#">Pesan</a></li>
+            <li><a id="menu-pendaftaran" href="#">Pendaftaran</a></li>
+            </ul>
+        </div>
+     </div>
+     <div id="content">
+        <h1>Content</h1>
+        <p>Isi Content</p>
+     </div>
+     <div id="sidebar">
+        <h1>SIDEBAR</h1>
+        <p>Isi Sidebar</p>
+     </div>
+     <div id="footer">
+         <h1>Footer</h1>
+         <footer>Disini Footernya</footer>
+     </div>
+  </div>
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="dist/js/jquery.amaran.js"></script>
+  <script type="text/javascript" src="dist/js/jquery.amaran.min.js"></script>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $('#menu-pesan').click(function(event){
+          event.preventDefault();
+          $.ajax({
+            url:'content/pesan.html',
+            type :'GET',
+            dataType:'html',
+            data:'',
+            success:function(data){
+              $('#content').html(data);
+              console.log('Sukses');
+
+              $('#input-nama').keyup(function(){
+                var nama=$(this).val();
+                if(nama.length<5){
+                  $(this).removeClass('has-success');
+                  $(this).addClass('has-error');
+                  $('#keterangan').text('Nama Harus Lebih Dari 5 Karakter!!!');
+                  $('#input-email').attr('disabled', true);
+                  console.log('Harusnya Merah');
+
+
+                }else{
+                  $(this).removeClass('has-error');
+                  $(this).addClass('has-success');
+                  $('#keterangan').text('Yak Sempurna...');
+                  $('#input-email').removeAttr('disabled');
+
+                  console.log('Harusnya hijau');
+                }
+              });
+
+
+        
+
+
+                $('#input-email').keyup(function(){
+                var name=$(this).val();
+
+
+               $('#kon-email').keyup(function(){
+                var nama=$(this).val();
+                if(nama!=name){
+                  $(this).removeClass('has-success');
+                  $(this).addClass('has-error');
+                  $('#keter').text('Harus Sama');
+                  console.log('Harusnya Merah');
+
+                }else{
+                  $(this).removeClass('has-error');
+                  $(this).addClass('has-success');
+                  $('#keter').text('Yak Sempurna...');
+
+                  $.amaran({
+                    'message':'Mantep..',
+                    'position':'top right',
+                    'inEffect':'slideRight',
+                    'outEffect':'slideLeft'
+                  });
+
+                  console.log('Harusnya hijau');
+                }
+              });
+   });
+
+
+
+
+            },
+            error:function(){
+              console.log('Error');
+            }
+          });
+        });
+
+      });
+
+
+
+
+      $(document).ready(function(){
+        $('#menu-pendaftaran').click(function(event){
+          event.preventDefault();
+          $.ajax({
+            url:'content/daftar.html',
+            type :'GET',
+            dataType:'html',
+            data:'',
+            success:function(data){
+              $('#content').html(data);
+              console.log('Sukses');
+            }
+          });
+        });
+      });
+
+                </script>
+</body>
+</html>
